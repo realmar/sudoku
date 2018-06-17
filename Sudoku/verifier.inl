@@ -33,16 +33,7 @@ namespace realmar::sudoku {
     SUDOKU_TEMPLATE bool verifier<TEMPLATED_TYPES>::is_valid(const sudoku_t<TEMPLATED_TYPES>& sudoku, SizeType x, SizeType y) const {
         if (!is_vector_valid(sudoku.get_row(y))) return false;
         if (!is_vector_valid(sudoku.get_column(x))) return false;
-
-        // make sure index size suffices
-        static_assert(Size < 256);
-
-        // use workaround
-        unsigned char xx = x;
-        unsigned char yy = y;
-
-
-        if (!is_matrix_valid(sudoku.get_matrix(xx / 3, yy / 3))) return false;
+        if (!is_matrix_valid(sudoku.get_matrix(x / sudoku.matrix_row_size(), y / sudoku.matrix_row_size()))) return false;
         return true;
     }
 
