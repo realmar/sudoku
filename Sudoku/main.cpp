@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "verifier.inl"
 #include "generator.inl"
@@ -18,7 +19,10 @@ int main()
     std::cout << "Sudoku:\n\n";
     print_sudoku(sudoku);
 
+    const auto start = std::chrono::high_resolution_clock::now();
     const auto is_valid = solver.solve(sudoku);
+    const auto finish = std::chrono::high_resolution_clock::now();
+
     if (!is_valid) {
         std::cout << "\nSudoku is not solvable\n";
     }
@@ -27,7 +31,11 @@ int main()
         print_sudoku(sudoku);
     }
 
-    std::cin.get();
+
+    std::chrono::duration<double> elapsed = finish - start;
+    std::cout << "\nElapsed time: " << elapsed.count() << "s" << std::endl;
+
+    // std::cin.get();
 
     return 0;
 }

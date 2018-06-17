@@ -1,6 +1,5 @@
 #pragma once
 
-#include <unordered_set>
 #include "sudoku.inl"
 #include "defines.hpp"
 
@@ -9,15 +8,14 @@ namespace realmar::sudoku {
     private:
         bool is_vector_valid(const sudoku_vector<TEMPLATED_TYPES>& vector) const;
         bool is_matrix_valid(const sudoku_matrix<SizeType, calculate_matrix_row_size<SizeType, Size>(), T>& matrix) const {
-            std::unordered_set<sudoku_cell<T>> set;
-            for (auto&& vec : matrix) {
-                for (auto&& item : vec) {
+            std::array<bool, Size> occupied{};
+            for (auto&& vector : matrix) {
+                for (auto& item : vector) {
                     if (!item.has_value()) continue;
-                    if (set.find(item) != set.end()) return false;
-                    set.emplace(item);
+                    if (occupied[item.value() - 1]) return false;
+                    occupied[item.value() - 1] = true;
                 }
             }
-
             return true;
         }
 

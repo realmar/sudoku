@@ -4,11 +4,11 @@
 
 namespace realmar::sudoku {
     SUDOKU_TEMPLATE bool verifier<TEMPLATED_TYPES>::is_vector_valid(const sudoku_vector<TEMPLATED_TYPES>& vector) const {
-        std::unordered_set<sudoku_cell<T>> set;
-        for (auto&& item : vector) {
+        std::array<bool, Size> occupied{};
+        for (auto& item : vector) {
             if (!item.has_value()) continue;
-            if (set.find(item) != set.end()) return false;
-            set.emplace(item);
+            if (occupied[item.value() - 1]) return false;
+            occupied[item.value() - 1] = true;
         }
 
         return true;
