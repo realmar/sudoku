@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "solver.hpp"
 #include "utils.inl"
@@ -57,7 +57,7 @@ namespace realmar::sudoku {
                 previous_failed = false;
             }
             else {
-                if (_verifier->is_valid(sudoku) && !previous_failed) {
+                if (_verifier->is_valid(sudoku, x, y) && !previous_failed) {
                     if (!increment_counters<SizeType, Size>(x, y, previous_failed)) break;
                 }
                 else {

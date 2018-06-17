@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "sudoku.inl"
 #include "defines.hpp"
@@ -21,6 +21,7 @@ namespace realmar::sudoku {
 
     public:
         bool is_valid(const sudoku_t<TEMPLATED_TYPES>& sudoku) const;
+        bool is_valid(const sudoku_t<TEMPLATED_TYPES>& sudoku, SizeType x, SizeType y) const;
         bool is_filled(sudoku_t<TEMPLATED_TYPES>& sudoku) const;
     };
 }
